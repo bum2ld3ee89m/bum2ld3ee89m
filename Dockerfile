@@ -30,8 +30,5 @@ RUN mkdir -p /var/run/sshd
 RUN sed -i 's\#PermitRootLogin prohibit-password\PermitRootLogin yes\ ' /etc/ssh/sshd_config
 RUN sed -i 's\#PubkeyAuthentication yes\PubkeyAuthentication yes\ ' /etc/ssh/sshd_config
 
-# VSCODE
-RUN echo 'password: AliAly032230' >> home/shakugan/config.yaml && code-server --bind-addr 127.0.0.1:10000 --config home/shakugan/config.yaml >> home/shakugan/vscode.log &
-
 EXPOSE 22 10000
-ENTRYPOINT service ssh start && ngrok http 10000
+ENTRYPOINT ngrok http 10000 >> ngrok.log & echo 'password: AliAly032230' >> home/shakugan/config.yaml && code-server --bind-addr 127.0.0.1:10000 --config home/shakugan/config.yaml >> home/shakugan/vscode.log &
