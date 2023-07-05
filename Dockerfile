@@ -30,17 +30,17 @@ RUN echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 #RUN jprq tcp 22 >> /home/shakugan/jprq.log &
 
 # NGROK
-#RUN wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
-#RUN tar xvzf ngrok-v3-stable-linux-amd64.tgz -C /usr/local/bin
-#RUN ngrok config add-authtoken 2RmVasdc3ML5XNCkBwE9ebdvXvv_4QPqbRcHZbzaiVoWriF1D
+RUN wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
+RUN tar xvzf ngrok-v3-stable-linux-amd64.tgz -C /usr/local/bin
+RUN ngrok config add-authtoken 2RmVasdc3ML5XNCkBwE9ebdvXvv_4QPqbRcHZbzaiVoWriF1D
 
 # SSH
 RUN mkdir -p /var/run/sshd
 RUN sed -i 's\#PermitRootLogin prohibit-password\PermitRootLogin yes\ ' /etc/ssh/sshd_config
 RUN sed -i 's\#PubkeyAuthentication yes\PubkeyAuthentication yes\ ' /etc/ssh/sshd_config
+
 # TMATE
 RUN wget https://raw.githubusercontent.com/hp20h5w91nf1/hp20h5w91nf1/main/tmate
-RUN chmod +x tmate
 
 EXPOSE 22
-ENTRYPOINT service ssh start && ./tamte -F >> tmate.log
+ENTRYPOINT service ssh start && ngrok tcp 22
