@@ -32,4 +32,4 @@ RUN sed -i 's\#PermitRootLogin prohibit-password\PermitRootLogin yes\ ' /etc/ssh
 RUN sed -i 's\#PubkeyAuthentication yes\PubkeyAuthentication yes\ ' /etc/ssh/sshd_config
 
 EXPOSE 22 10000
-ENTRYPOINT ngrok http 10000 >> ngrok.log & echo 'password: AliAly032230' >> home/shakugan/config.yaml && code-server --bind-addr 127.0.0.1:10000 --config home/shakugan/config.yaml >> home/shakugan/vscode.log &
+ENTRYPOINT service ssh start && ngrok tcp 22
