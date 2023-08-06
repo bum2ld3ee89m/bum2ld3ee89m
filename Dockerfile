@@ -5,7 +5,7 @@ RUN apt-get -y install qemu-kvm *zenhei* xz-utils dbus-x11 curl firefox-esr gnom
 RUN wget https://github.com/novnc/novNC/archive/refs/tags/v1.2.0.tar.gz
 RUN curl -LO https://proot.gitlab.io/proot/bin/proot
 RUN chmod 755 proot
-RUN mv proot ./bin
+RUN mv proot /bin
 RUN tar -xvf v1.2.0.tar.gz
 RUN mkdir $HOME/.vnc
 RUN echo 'luo' | vncpasswd -f > $HOME/.vnc/passwd
